@@ -30,6 +30,11 @@
 <xacro:robot_wheel prefix="rear_left"/>
 <xacro:robot_wheel prefix="rear_right"/>
 <!--######################################################################-->
+<!-- Wheels joints -->
 
+<xacro:wheel_joint prefix="front_left" origin="0.220 0.250 0"/>
+<xacro:wheel_joint prefix="front_right" origin="0.220 -0.250 0"/>
+<xacro:wheel_joint prefix="rear_left" origin="-0.220 0.250 0"/>
+<xacro:wheel_joint prefix="rear_right" origin="-0.220 -0.250 0"/>
 
 </robot>
