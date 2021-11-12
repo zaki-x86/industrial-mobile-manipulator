@@ -2,27 +2,27 @@
 
 - [robot_description](#robot_description)
   - [Robot Base](#robot-base)
-    - [Specifications](#specifications)
-    - [Kinematics](#kinematics)
-    - [Software parameters](#software-parameters)
+    - [Base specifications](#base-specifications)
+    - [Base kinematics](#base-kinematics)
+    - [Base software parameters](#base-software-parameters)
   - [Robot Arm](#robot-arm)
     - [Arm Specifications](#arm-specifications)
     - [Arm software parameters](#arm-software-parameters)
 
 ## Robot Base ##
 
-### Specifications ###
+### Base specifications ###
 
 - Size: Somewhere within 600 x 450 x 200 (L x B x H, all in mm)
 - Type: Four-wheel differential drive robot
 - Speed: Up to 1 m/s
 - Payload: 50 kg (excluding the robot arm)
 
-### Kinematics ###
+### Base kinematics ###
 
 Our robot base has only 2 degrees of freedom: a translation along the x axis and rotation along the z axis. Since our robot moves only on the ground, it cannot translate in the z axis as well.
 
-### Software parameters ###
+### Base software parameters ###
 
 Let's consider the mobile robot base as a blackbox: if you give it specific velocity, the robot base should move and, in turn, give the position it has moved to. In ROS terms, the mobile robot takes in information through a
 topic called /cmd_vel (command velocity) and gives out /odom (odometery).
