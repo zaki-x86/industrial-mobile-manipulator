@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://ros.org/wiki/xacro" name="robot_base"
->
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="robot_base" >
+
+<xacro:include filename="$(find robot_description)/urdf/robot_base_essentials.xacro" />
+<xacro:include filename="$(find robot_description)/urdf/gazebo_essentials_base.xacro" />
 
 <!--######################################################################-->
-<!-- Base link definition -->
-
-<link name="base_link">
+  <link name="base_link">
     <inertial>
       <origin
         xyz="0.0030946 4.78250032638821E-11 0.053305"
@@ -20,21 +21,19 @@
         iyz="1.09578155845563E-12"
         izz="2.1239326987473" />
     </inertial>
-    <!-- Geometric Definitions for visualization -->
     <visual>
-        <origin
+      <origin
         xyz="0 0 0"
         rpy="1.5707963267949 0 3.14" />
-        <geometry>
-            <mesh filename="package://robot_description/meshes/robot_base.stl"/>
-        </geometry>
-        <material
+      <geometry>
+        <mesh filename="package://robot_description/meshes/robot_base.stl" />
+      </geometry>
+      <material
         name="">
         <color
-            rgba="0.79216 0.81961 0.93333 1" />
-        </material>
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
     </visual>
-    <!-- Collision Definitions -->
     <collision>
       <origin
         xyz="0 0 0"
@@ -43,22 +42,35 @@
         <mesh filename="package://robot_description/meshes/robot_base.stl" />
       </geometry>
     </collision>
-    
-</link>
-
-<!--######################################################################-->
-<!-- Wheels definitions -->
+  </link>
+<!--############################# Remaining wheels #########################################-->
 
 <xacro:robot_wheel prefix="front_left"/>
 <xacro:robot_wheel prefix="front_right"/>
 <xacro:robot_wheel prefix="rear_left"/>
 <xacro:robot_wheel prefix="rear_right"/>
-<!--######################################################################-->
-<!-- Wheels joints -->
+
+<!--############################# Wheel Joints #########################################-->
 
 <xacro:wheel_joint prefix="front_left" origin="0.220 0.250 0"/>
 <xacro:wheel_joint prefix="front_right" origin="0.220 -0.250 0"/>
 <xacro:wheel_joint prefix="rear_left" origin="-0.220 0.250 0"/>
 <xacro:wheel_joint prefix="rear_right" origin="-0.220 -0.250 0"/>
+
+<!--############################# Wheel Transmissions #########################################-->
+
+<xacro:base_transmission prefix="front_left"/>
+<xacro:base_transmission prefix="front_right"/>
+<xacro:base_transmission prefix="rear_left"/>
+<xacro:base_transmission prefix="rear_right"/>
+
+<!--############################# Wheel Friction #########################################-->
+
+<xacro:wheel_friction prefix="front_left"/>
+<xacro:wheel_friction prefix="front_right"/>
+<xacro:wheel_friction prefix="rear_left"/>
+<xacro:wheel_friction prefix="rear_right"/>
+
+<!--#####################################################################################-->
 
 </robot>
