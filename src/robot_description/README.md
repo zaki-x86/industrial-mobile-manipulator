@@ -1,6 +1,7 @@
 # robot_description #
 
 - [robot_description](#robot_description)
+  - [Description](#description)
   - [Robot Base](#robot-base)
     - [Base specifications](#base-specifications)
     - [Base kinematics](#base-kinematics)
@@ -8,6 +9,10 @@
   - [Robot Arm](#robot-arm)
     - [Arm Specifications](#arm-specifications)
     - [Arm software parameters](#arm-software-parameters)
+
+## Description ##
+
+describing the physical layout of the robot
 
 ## Robot Base ##
 
