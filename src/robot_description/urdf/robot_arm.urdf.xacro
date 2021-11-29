@@ -1,7 +1,12 @@
 <?xml version="1.0"?>
 
-<robot name="robot_arm">
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="robot_arm" >
+
+<xacro:include filename="$(find robot_description)/urdf/robot_arm_essentials.xacro" />
+<xacro:include filename="$(find robot_description)/urdf/gazebo_essentials_arm.xacro" />
+
   <link name="world"/>
+
   <link name="arm_base">
     <inertial>
       <origin
@@ -197,111 +202,21 @@
     </collision>
   </link>
 <!--######################################################################-->
-<joint name="arm_base_joint" type="continuous">
-  <axis xyz="0 0 1"/>
-  <parent link="world"/>
-  <child link="arm_base"/>
-  <origin rpy="0 0 0" xyz="0.0 0.0 0.1"/>
-</joint>
 
-<joint name="shoulder_joint" type="continuous">
-  <axis xyz="0 1 0"/>
-  <parent link="arm_base"/>
-  <child link="bicep"/>
-  <origin rpy="0 0 1.5708" xyz="-0.05166 0.0 0.20271"/>
-</joint>
-
-<joint name="bottom_wrist_joint" type="continuous">
-  <axis xyz="0 1 0"/>
-  <parent link="bicep"/>
-  <child link="bottom_wrist"/>
-  <origin rpy="0 0 0" xyz="0.0 -0.05194 0.269"/>
-</joint>
-
-<joint name="elbow_joint" type="continuous">
-  <axis xyz="0 0 1"/>
-  <parent link="bottom_wrist"/>
-  <child link="elbow"/>
-  <origin rpy="0 0 0" xyz="0.0 0 0.13522"/>
-</joint>
-
-<joint name="top_wrist_joint" type="continuous">
-  <axis xyz="0 1 0"/>
-  <parent link="elbow"/>
-  <child link="top_wrist"/>
-  <origin rpy="0 0 0" xyz="0.0 0 0.20994"/>
-</joint>
-<!--######################################################################-->
-<transmission name="arm_base_trans" type="SimpleTransmission">
-  <type>transmission_interface/SimpleTransmission</type>
-  <actuator name="arm_base_motor">
-   <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-   <mechanicalReduction>1</mechanicalReduction>
-  </actuator>
-  <joint name="arm_base_joint">
-   <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-  </joint>
-</transmission>
-
-<transmission name="shoulder_trans" type="SimpleTransmission">
-  <type>transmission_interface/SimpleTransmission</type>
-  <actuator name="shoulder_motor">
-   <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-   <mechanicalReduction>1</mechanicalReduction>
-  </actuator>
-  <joint name="shoulder_joint">
-   <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-  </joint>
-</transmission>
-
-<transmission name="bottom_wrist_trans" type="SimpleTransmission">
-  <type>transmission_interface/SimpleTransmission</type>
-  <actuator name="bottom_wrist_motor">
-   <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-   <mechanicalReduction>1</mechanicalReduction>
-  </actuator>
-  <joint name="bottom_wrist_joint">
-   <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-  </joint>
-</transmission>
-
-<transmission name="elbow_trans" type="SimpleTransmission">
-  <type>transmission_interface/SimpleTransmission</type>
-  <actuator name="elbow_motor">
-   <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-   <mechanicalReduction>1</mechanicalReduction>
-  </actuator>
-  <joint name="elbow_joint">
-   <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-  </joint>
-</transmission>
-
-<transmission name="top_wrist_trans" type="SimpleTransmission">
-  <type>transmission_interface/SimpleTransmission</type>
-  <actuator name="top_wrist_motor">
-   <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-   <mechanicalReduction>1</mechanicalReduction>
-  </actuator>
-  <joint name="top_wrist_joint">
-   <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-  </joint>
-</transmission>
+<xacro:arm_joint prefix="arm_base" parent="world" child="arm_base" originxyz="0.0 0.0 0.1" originrpy="0 0 0"/>
+<xacro:arm_joint prefix="shoulder" parent="arm_base" child="bicep" originxyz="-0.05166 0.0 0.20271" originrpy="0 0 1.5708"/>
+<xacro:arm_joint prefix="bottom_wrist" parent="bicep" child="bottom_wrist" originxyz="0.0 -0.05194 0.269" originrpy="0 0 0"/>
+<xacro:arm_joint prefix="elbow" parent="bottom_wrist" child="elbow" originxyz="0.0 0 0.13522" originrpy="0 0 0"/>
+<xacro:arm_joint prefix="top_wrist" parent="elbow" child="top_wrist" originxyz="0.0 0 0.20994" originrpy="0 0 0"/>
 
 <!--######################################################################-->
-<gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/</robotNamespace>
-      <controlPeriod>0.001</controlPeriod>
-      <legacyModeNS>false</legacyModeNS>
-    </plugin>
-  </gazebo>
-<!--######################################################################-->
-  <gazebo>
-    <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
-      <jointName>arm_base_joint, shoulder_joint, bottom_wrist_joint, elbow_joint, bottom_wrist_joint</jointName>
-    </plugin>
-  </gazebo>
-<!--######################################################################-->
 
+<xacro:arm_transmission prefix="arm_base"/>
+<xacro:arm_transmission prefix="shoulder"/>
+<xacro:arm_transmission prefix="bottom_wrist"/>
+<xacro:arm_transmission prefix="elbow"/>
+<xacro:arm_transmission prefix="top_wrist"/>
+
+<!--######################################################################-->
 
 </robot>

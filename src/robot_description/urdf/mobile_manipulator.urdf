@@ -261,7 +261,8 @@
     </collision>
 </link>
 
-<link name="bicep">
+<link
+    name="bicep">
     <inertial>
       <origin
         xyz="0.12821 3.5589E-06 0.052492"
@@ -300,7 +301,8 @@
   </link>
 
 
-<link name="bottom_wrist">
+  <link
+    name="bottom_wrist">
     <inertial>
       <origin
         xyz="-9.1053E-08 -0.069257 -1.86629999995759E-07"
@@ -336,9 +338,10 @@
         <mesh filename="package://robot_description/meshes/wrist.stl" />
       </geometry>
     </collision>
-</link>
+  </link>
 
- <link name="elbow">
+ <link
+    name="elbow">
     <inertial>
       <origin
         xyz="-0.11109 1.1476E-08 0.046469"
@@ -374,9 +377,10 @@
         <mesh filename="package://robot_description/meshes/elbow.stl" />
       </geometry>
     </collision>
-</link>
+  </link>
 
-<link name="top_wrist">
+<link
+    name="top_wrist">
     <inertial>
       <origin
         xyz="-9.1053E-08 -0.069257 -1.86629999995759E-07"
@@ -412,8 +416,7 @@
         <mesh filename="package://robot_description/meshes/wrist.stl" />
       </geometry>
     </collision>
-</link>
-
+  </link>
 
 <joint name="arm_base_joint" type="continuous">
   <axis xyz="0 0 1"/>
